@@ -1,6 +1,31 @@
 import Head from "next/head";
+import Image from "next/image";
 
-export default function Home() {
+export async function getServerSideProps() {
+  try {
+    const { events_categories } = await import("/data/data.json");
+    console.log("events_categories", events_categories); 
+    return {
+      props: {
+        data: events_categories,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
+}
+
+export default function Home({ data }) {
+  console.log("data", data);
+  if (!data) {
+    // Handle loading state, return a loading spinner, or a message
+    return <div>Loading...</div>;
+  }
   return (
     <div>
       <Head>
@@ -17,38 +42,13 @@ export default function Home() {
         </nav>
       </header>
       <main>
-        <div>
-          <a href="">
-            <img />
-            <h2>Events in London</h2>
-            <p>
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
+        {data?.map((ev) => (
+          <a key={ev.id} href={`/event/${ev.id}`}>
+            <Image width={200} height={200} alt={ev.title} src={ev.image} />
+            <h2>{ev.title}</h2>
+            <p>{ev.description}</p>
           </a>
-          <a href="">
-            <img />
-            <h2>Events in San Francisco</h2>
-            <p>
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </a>
-          <a href="">
-            <img />
-            <h2>Events in Berlin</h2>
-            <p>
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </a>
-        </div>
+        ))}
       </main>
       <footer>
         <p> © 2023 clmnt - A project built with Next.js</p>

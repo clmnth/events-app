@@ -1,7 +1,7 @@
-const Page = () => {
+const EventPage = () => {
    return (
       <h1>Event in Blaaaa</h1>
    )
 };
 
-export default Page;
+export default EventPage;
