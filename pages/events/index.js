@@ -24,7 +24,8 @@ const EventsPage = ({ data }) => {
     <div>
       <h1>Events</h1>
       <div>
-        {data.map((ev) => (
+        {data?.map((ev) => (
+          // eslint-disable-next-line react/jsx-key
           <a href={`/events/${ev.id}`}>
             <Image
               src={ev.image}
