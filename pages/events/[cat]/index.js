@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from "next/link";
 
 export async function getStaticPaths() {
   const { events_categories } = await import("/data/data.json");
@@ -26,19 +26,26 @@ export async function getStaticProps(context) {
 
   const data = allEvents.filter((ev) => ev.city === id);
   console.log("data", data);
-  return { props: { data: data } };
+  return { props: { data: data, pageName: id } };
 }
 // The context object in the getStaticProps function contains various
 // properties related to the current request. One of these properties
 // is params, which holds the dynamic route parameters extracted from the URL.
 
-const EventsCatPage = ({ data }) => {
+const EventsCatPage = ({ data, pageName }) => {
   return (
     <div>
-      {data.map(ev => (
-        // eslint-disable-next-line react/jsx-key
-        <a href={`/events/${ev.city}/${ev.id}`}>
-          <Image
+      <h1> Events in {pageName} </h1>
+      <div>
+      {data.map((ev) => (
+        <Link
+          key={ev.id}
+          href={`/events/${ev.city}/${ev.id}`}
+          passHref
+          legacyBehavior
+        >
+          <a>
+            <Image
               src={ev.image}
               alt={ev.image}
               width="0"
@@ -48,10 +55,10 @@ const EventsCatPage = ({ data }) => {
             />
             <h2>{ev.title}</h2>
             <p>{ev.description}</p>
-        </a>
+          </a>
+        </Link>
       ))}
-     
-
+    </div>
     </div>
   );
 };

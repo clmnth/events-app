@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 export async function getServerSideProps() {
   try {
     const { events_categories } = await import("/data/data.json");
-    console.log("events_categories", events_categories); 
+    console.log("events_categories", events_categories);
     return {
       props: {
         data: events_categories,
@@ -35,19 +36,26 @@ export default function Home({ data }) {
       </Head>
       <header>
         <nav>
-          <img />
-          <a href=""> Home</a>
-          <a href="/events"> Events</a>
-          <a href="/about-us"> About Us</a>
+          <Link href="/" legacyBehavior passHref>
+            <a> Home</a>
+          </Link>
+          <Link href="/events" legacyBehavior passHref>
+            <a> Events</a>
+          </Link>
+          <Link href="/about-us" legacyBehavior passHref>
+            <a> About Us</a>
+          </Link>
         </nav>
       </header>
       <main>
         {data?.map((ev) => (
-          <a key={ev.id} href={`/events/${ev.id}`}>
-            <Image width={200} height={200} alt={ev.title} src={ev.image} />
-            <h2>{ev.title}</h2>
-            <p>{ev.description}</p>
-          </a>
+          <Link key={ev.id} href={`/events/${ev.id}`} passHref legacyBehavior>
+            <a>
+              <Image width={200} height={200} alt={ev.title} src={ev.image} />
+              <h2>{ev.title}</h2>
+              <p>{ev.description}</p>
+            </a>
+          </Link>
         ))}
       </main>
       <footer>

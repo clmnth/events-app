@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export async function getStaticProps() {
   try {
@@ -25,20 +26,20 @@ const EventsPage = ({ data }) => {
       <h1>Events</h1>
       <div>
         {data?.map((ev) => (
-          // eslint-disable-next-line react/jsx-key
-          <a href={`/events/${ev.id}`}>
-            <Image
-              src={ev.image}
-              alt={ev.image}
-              width="0"
-              height="0"
-              sizes="100vw"
-              style={{ width: "300px", height: "auto" }}
-            />
-            <h2>{ev.title}</h2>
-          </a>
+          <Link key={ev.id} href={`/events/${ev.id}`} legacyBehavior passHref>
+            <a>
+              <Image
+                src={ev.image}
+                alt={ev.image}
+                width="0"
+                height="0"
+                sizes="100vw"
+                style={{ width: "300px", height: "auto" }}
+              />
+              <h2>{ev.title}</h2>
+            </a>
+          </Link>
         ))}
-        
       </div>
     </div>
   );
