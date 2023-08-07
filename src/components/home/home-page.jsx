@@ -3,16 +3,26 @@ import Link from "next/link";
 
 export const HomePage = ({ data }) => {
   return (
-    <main>
+    <div className="home_body">
       {data?.map((ev) => (
-        <Link key={ev.id} href={`/events/${ev.id}`} passHref legacyBehavior>
-          <a>
-            <Image width={200} height={200} alt={ev.title} src={ev.image} />
-            <h2>{ev.title}</h2>
-            <p>{ev.description}</p>
+        <Link
+          
+          key={ev.id}
+          href={`/events/${ev.id}`}
+          passHref
+          legacyBehavior
+        >
+          <a className="card" href={`/events/${ev.id}`}>
+            <div className="image">
+            <Image width={300} height={300} alt={ev.title} src={ev.image} />
+            </div>
+            <div className="content">
+              <h2>{ev.title}</h2>
+              <p>{ev.description}</p>
+            </div>
           </a>
         </Link>
       ))}
-    </main>
+    </div>
   );
 };

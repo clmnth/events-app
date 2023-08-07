@@ -1,5 +1,6 @@
 import MainLayout from "@/src/components/layout/main-layout";
 import "../styles/globals.css";
+import "../styles/general.sass";
 
 function myApp({ Component, pageProps }) {
   return (

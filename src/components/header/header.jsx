@@ -1,8 +1,11 @@
-import Link from "next/link"
+import Link from "next/link";
+import Image from "next/image";
 
 export const Header = () => {
-   return (
-      <header>
+  return (
+    <header>
+      <div className="topNav">
+        <Image src={"/images/event.png"} width={100} height={70} alt="logo" />
         <nav>
           <Link href="/" legacyBehavior passHref>
             <a> Home</a>
@@ -14,6 +17,8 @@ export const Header = () => {
             <a> About Us</a>
           </Link>
         </nav>
-      </header>
-   )
-}
+      </div>
+      <h1>Excepteur sint occaecat</h1>
+    </header>
+  );
+};
