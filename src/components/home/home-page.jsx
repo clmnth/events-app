@@ -14,7 +14,7 @@ export const HomePage = ({ data }) => {
         >
           <a className="card" href={`/events/${ev.id}`}>
             <div className="image">
-            <Image width={300} height={300} alt={ev.title} src={ev.image} />
+            <Image width={400} height={300} alt={ev.title} src={ev.image} />
             </div>
             <div className="content">
               <h2>{ev.title}</h2>

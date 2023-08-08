@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import CatEvent from "@/src/components/events/catEvent";
 
 export async function getStaticPaths() {
   const { events_categories } = await import("/data/data.json");
@@ -33,34 +32,7 @@ export async function getStaticProps(context) {
 // is params, which holds the dynamic route parameters extracted from the URL.
 
 const EventsCatPage = ({ data, pageName }) => {
-  return (
-    <div>
-      <h1> Events in {pageName} </h1>
-      <div>
-      {data.map((ev) => (
-        <Link
-          key={ev.id}
-          href={`/events/${ev.city}/${ev.id}`}
-          passHref
-          legacyBehavior
-        >
-          <a>
-            <Image
-              src={ev.image}
-              alt={ev.image}
-              width="0"
-              height="0"
-              sizes="100vw"
-              style={{ width: "300px", height: "auto" }}
-            />
-            <h2>{ev.title}</h2>
-            <p>{ev.description}</p>
-          </a>
-        </Link>
-      ))}
-    </div>
-    </div>
-  );
+  return <CatEvent data={data} pageName={pageName}/>
 };
 
 export default EventsCatPage;

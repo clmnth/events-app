@@ -129,14 +129,6 @@
       ]
     },
     {
-      "id": "international-conference-on-industrial-design",
-      "title": "International Conference on Industrial Design",
-      "city": "berlin",
-      "description": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscisfa.",
-      "image": "https://images.unsplash.com/photo-1546726747-421c6d69c929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
-      "emails_registered": ["alicia@gmail.com", "monica@gmail.com"]
-    },
-    {
       "id": "hatch-conference",
       "title": "Hatch Conference - UX & Design",
       "city": "berlin",
