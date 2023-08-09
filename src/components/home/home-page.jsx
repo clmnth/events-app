@@ -6,7 +6,6 @@ export const HomePage = ({ data }) => {
     <div className="home_body">
       {data?.map((ev) => (
         <Link
-          
           key={ev.id}
           href={`/events/${ev.id}`}
           passHref

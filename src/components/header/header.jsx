@@ -6,12 +6,14 @@ export const Header = () => {
     <header>
       <div>
         <div className="topNav">
+        <Link href="/" legacyBehavior passHref>
           <Image
             src={"/images/events.png"}
             width={100}
             height={30}
             alt="logo"
           />
+          </Link>
           <nav>
             <Link href="/" legacyBehavior passHref>
               <a> Home</a>
@@ -24,7 +26,7 @@ export const Header = () => {
             </Link>
           </nav>
         </div>
-        <h1>Excepteur sint occaecat</h1>
+        <p className="title">Excepteur sint occaecat</p>
       </div>
     </header>
   );

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import SingleEvent from "@/src/components/events/single-event";
 
 export async function getStaticPaths() {
   const data = await import("/data/data.json");
@@ -29,15 +29,6 @@ export async function getStaticProps(context) {
   };
 }
 
-const EventPage = ({ data }) => {
-  console.log("hey data", data);
-  return (
-    <div>
-      <h1>{data.title}</h1>
-      <Image src={data.image} width={700} height={500} alt={data.title} />
-      <p>{data.description}</p>
-    </div>
-  );
-};
+const EventPage = ({ data }) => <SingleEvent data={data}/>;
 
 export default EventPage;
