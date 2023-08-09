@@ -1,8 +1,12 @@
 import SingleEvent from "@/src/components/events/single-event";
 
+const EventPage = ({ data }) => <SingleEvent data={data} />;
+
+export default EventPage;
+
 export async function getStaticPaths() {
   const data = await import("/data/data.json");
-  const allEvents = Array.from(data);
+  const allEvents =data.allEvents;
 
   const allPaths = allEvents.map((path) => {
     return {
@@ -29,6 +33,4 @@ export async function getStaticProps(context) {
   };
 }
 
-const EventPage = ({ data }) => <SingleEvent data={data}/>;
 
-export default EventPage;
