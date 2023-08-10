@@ -8,6 +8,7 @@ export const Header = () => {
         <div className="topNav">
         <Link href="/" legacyBehavior passHref>
           <Image
+            className="logo"
             src={"/images/events.png"}
             width={100}
             height={30}
