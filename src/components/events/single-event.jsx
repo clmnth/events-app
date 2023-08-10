@@ -4,13 +4,40 @@ import { useRouter } from "next/router";
 
 const SingleEvent = ({ data }) => {
   const inputEmail = useRef();
-  console.log("inputEmail", inputEmail);
   const router = useRouter();
-  console.log("router", router);
+  const [message, setMessage] = useState("");
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const emailValue = inputEmail.current.value;
+    const eventId = router?.query.id;
+
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (!emailValue.match(emailRegex)) {
+      setMessage("Please enter a valid email address")
+
+    }
+
+    try {
+      const response = await fetch("/api/email-registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },  
+        body: JSON.stringify({ email: emailValue, eventId }),
+      });
+
+      if(!response.ok) throw new Error(`Error: ${response.status}`);
+      const data = await response.json();
+      setMessage(data.message);
+      inputEmail.current.value = "";
+
+      // POST fetch request
+      // body emailValue and the eventId
+    } catch (error) {
+      console.log("onSubmit error", error);
+    }
   };
 
   return (
@@ -26,8 +53,9 @@ const SingleEvent = ({ data }) => {
           id="email"
           placeholder="Please insert your email here"
         />
-        <button type="button">Submit</button>
+        <button type="submit">Submit</button>
       </form>
+      <p>{message}</p>
     </div>
   );
 };
